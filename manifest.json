@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Fabgram",
+  "version": "1.0",
+  "description": "Your Fab Assistant",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+    },
+    "default_title": "Fabgram",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab","clipboardWrite","clipboardRead"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+   
+  }
+ 
+
+}

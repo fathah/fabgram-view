@@ -1,0 +1,26 @@
+
+
+::selection {
+    background-color: rgba(0, 0, 0,0.02) !important; 
+    
+  }
+
+.faab-overlay-container{
+    border-radius: 15px;
+    background-color: white !important;
+    color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 50vw;
+    padding: 30px;
+    z-index: 10000 !important;
+  }
+
+  .faab-overlay-container button{
+    background: #000;
+    color: #fff;
+    padding: 10px ;
+  }
