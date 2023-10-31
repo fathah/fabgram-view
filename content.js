@@ -58,9 +58,10 @@ document.body.appendChild(divEl);
   function updateContentDiv(data){
     if (document.querySelector(".faab-overlay-container")) {
         let divEl = document.querySelector(".faab-overlay-container");
-        divEl.innerHTML =  data;
+        divEl.innerHTML =  `${data.slice(0, 100)}...<br/>`;
         appendButton();
     }
   }
 
-  setInterval(getData, 7000)
+  Promise.all([getData()]);
+  setInterval(getData, 5000)
