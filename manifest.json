@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Fabgram",
+  "name": "Fabgram Viewer",
   "version": "1.0",
-  "description": "Your Fab Assistant",
+  "description": "Your Fab Assistant Viewer",
   "icons": {
     "16": "images/icon-16.png",
     "48": "images/icon-48.png",
@@ -14,7 +14,7 @@
     "48": "images/icon-48.png",
     "128": "images/icon-128.png"
     },
-    "default_title": "Fabgram",
+    "default_title": "Fabgram Viewer",
     "default_popup": "popup.html"
   },
   "permissions": [
