@@ -829,16 +829,24 @@ function decryptWithKey(encryptedText) {
   return plaintext;
 }
 
+const spaceKeyEvent = new KeyboardEvent('keypress', {
+  key: ' ',
+  code: 'Space',
+  keyCode: 32,
+  which: 32,
+  charCode: 32,
+});
+
+const enterEvent = new KeyboardEvent("keypress", {
+  key: "Enter",
+  code: "Enter",
+  which: 13,
+  keyCode: 13,
+  charCode: 13,
+  bubbles: true,
+});
 
 
-let button = document.getElementById('myButton');
-
-if(button){
-    button.addEventListener('click', function() {
-        console.log('Button clicked! Calling myFunction...');
-       
-    });
-}
 
 let curText = "";
 let divEl = document.createElement("div");
@@ -848,28 +856,51 @@ document.body.appendChild(divEl);
   function appendButton(){
     let container = document.querySelector(".faab-overlay-container");
     let btn = document.createElement("button");
-    btn.innerText = "Paste to Input";
+    btn.innerText = "Ask ChatGPT";
     btn.addEventListener("click", function () {
       let input = document.getElementById("prompt-textarea");
-      input.value = curText;
-      input.focus();
-      const enterEvent = new KeyboardEvent("keypress", {
-        key: "Enter",
-        code: "Enter",
-        which: 13,
-        keyCode: 13,
-        charCode: 13,
-        bubbles: true,
-      });
+      if (input) {
+        input.value = curText;
     
-      // Dispatch the "Enter" keypress event on the input element
-      input.dispatchEvent(enterEvent);
-      let sendButton = document.querySelector('[data-testid="send-button"]');
-      if (sendButton) {
-        sendButton.click();
+        let dummySpaces = ' '.repeat(5); // Adjust the number and type of characters as needed
+        input.value += dummySpaces;
+    
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+    
+        // Attempt to click the button after a delay
+        setTimeout(() => {
+          let sendButton = document.querySelector('[data-testid="send-button"]');
+          if (sendButton && !sendButton.disabled) {
+            sendButton.click();
+          } else {
+            console.log("Button is disabled or not found");
+          }
+        }, 200); // Adjust the delay as needed
+      } else {
+        console.log("Input element not found");
       }
     });
+
+    
+    // COPY BUTTON
+    let copyBtn = document.createElement("button");
+    copyBtn.innerText = "Copy";
+    copyBtn.addEventListener("click", function () {
+      navigator.clipboard.writeText(curText);
+    });
+
+    let googleSearch = document.createElement("button");
+    googleSearch.innerText = "Search Google";
+    googleSearch.addEventListener("click", function () {
+      window.open('http://www.google.com/search?q=' + curText, '_blank');
+    });
+
+
     container.appendChild(btn);
+    container.appendChild(copyBtn);
+    container.appendChild(googleSearch);
+
   }
 
   async function getData(){
@@ -886,10 +917,16 @@ document.body.appendChild(divEl);
     }
   }
 
+  function substring(str){
+    if(str.length>150){
+      return `${str.slice(0, 150)}.....`;
+    }
+    return str;
+  }
   function updateContentDiv(data){
     if (document.querySelector(".faab-overlay-container")) {
         let divEl = document.querySelector(".faab-overlay-container");
-        divEl.innerHTML =  `${data.slice(0, 100)}...<br/>`;
+        divEl.innerHTML =  `${substring(data)}<br/><br/>`;
         appendButton();
     }
   }
